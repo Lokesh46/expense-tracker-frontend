@@ -1,0 +1,29 @@
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" routerLink="/home" (click)="closeMenu()">
+      <span class="symbol">₹</span>
+      <span class="text">
+        <strong>Expense</strong>
+        <span>Tracker</span>
+      </span>
+    </a>
+
+    <button class="menu-toggle" type="button" (click)="toggleMenu()" aria-label="Toggle navigation">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="nav-links" [class.open]="isMenuOpen()">
+      <a
+        *ngFor="let link of navLinks()"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: link.path === '/home' }"
+        [routerLink]="link.path"
+        (click)="closeMenu()"
+      >
+        {{ link.label }}
+      </a>
+    </nav>
+  </div>
+</header>

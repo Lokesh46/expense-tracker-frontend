@@ -1,0 +1,50 @@
+<section class="page-card full-width home-wrapper">
+  <header class="home-header">
+    <span class="welcome-badge">Dashboard</span>
+    <h2>{{ greeting() }}</h2>
+    <p class="subtitle">
+      Set the tone for mindful spending. Explore shortcuts, plan upcoming goals, and stay inspired.
+    </p>
+  </header>
+
+  <section class="home-body">
+    <article class="focus-card">
+      <h3>Today&apos;s focus</h3>
+      <p>
+        Keep logging expenses as they happen. Small, consistent updates keep your insights fresh and
+        actionable. Need to adjust a previous entry? Dive into the expense list and fine-tune with
+        ease.
+      </p>
+      <div class="cta-row">
+        <a class="primary-cta" routerLink="/expenses/new">Add an expense</a>
+        <a class="ghost-cta" routerLink="/budgets">Plan my budget</a>
+      </div>
+    </article>
+
+    <aside class="tips">
+      <h3>Quick tips</h3>
+      <ul>
+        <li *ngFor="let tip of plannerTips()">
+          {{ tip }}
+        </li>
+      </ul>
+    </aside>
+  </section>
+
+  <section class="quick-actions">
+    <article class="action-card" *ngFor="let action of quickActions()">
+      <h3>{{ action.title }}</h3>
+      <p>{{ action.description }}</p>
+      <button type="button" class="action-link">
+        {{ action.cta }}
+      </button>
+    </article>
+  </section>
+
+  <footer class="home-footer">
+    <p>
+      Need to adjust your personal details or notification settings?
+      <a routerLink="/profile">Visit your profile</a>
+    </p>
+  </footer>
+</section>
