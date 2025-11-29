@@ -11,8 +11,13 @@
     <div class="footer-links">
       <a routerLink="/home">Home</a>
       <a routerLink="/profile">Profile</a>
-      <a routerLink="/login">Login</a>
-      <a routerLink="/register">Register</a>
+      <ng-container *ngIf="!isAuthenticated(); else loggedIn">
+        <a routerLink="/login">Login</a>
+        <a routerLink="/register">Register</a>
+      </ng-container>
+      <ng-template #loggedIn>
+        <button class="logout-link" (click)="logout()">Logout</button>
+      </ng-template>
     </div>
   </div>
 

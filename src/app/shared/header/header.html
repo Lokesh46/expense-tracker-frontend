@@ -24,6 +24,16 @@
       >
         {{ link.label }}
       </a>
+
+      <div class="auth-actions">
+        <ng-container *ngIf="!isAuthenticated(); else loggedIn">
+          <a routerLink="/login" (click)="closeMenu()">Login</a>
+          <a routerLink="/register" (click)="closeMenu()">Register</a>
+        </ng-container>
+        <ng-template #loggedIn>
+          <button class="logout-btn" type="button" (click)="logout()">Logout</button>
+        </ng-template>
+      </div>
     </nav>
   </div>
 </header>

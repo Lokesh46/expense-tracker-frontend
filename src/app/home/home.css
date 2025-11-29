@@ -178,6 +178,7 @@
   gap: 0.35rem;
   cursor: pointer;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
+  text-decoration: none;
 }
 
 .action-link::after {

@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, signal } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Component, inject, signal } from '@angular/core';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { AuthService } from '../../core/services/auth.service';
 
 interface NavLink {
   label: string;
@@ -15,14 +16,22 @@ interface NavLink {
   styleUrl: './header.css',
 })
 export class Header {
+  private readonly router = inject(Router);
+  private readonly auth = inject(AuthService);
+
   protected readonly navLinks = signal<NavLink[]>([
     { label: 'Home', path: '/home' },
+    { label: 'Categories', path: '/categories' },
+    { label: 'Transactions', path: '/transactions' },
     { label: 'Profile', path: '/profile' },
-    { label: 'Login', path: '/login' },
-    { label: 'Register', path: '/register' },
   ]);
 
+  protected readonly isAuthenticated = signal(this.auth.getToken() != null);
   protected readonly isMenuOpen = signal(false);
+
+  constructor() {
+    this.auth.isAuthenticated$.subscribe((v) => this.isAuthenticated.set(v));
+  }
 
   toggleMenu(): void {
     this.isMenuOpen.update((value) => !value);
@@ -31,4 +40,10 @@ export class Header {
   closeMenu(): void {
     this.isMenuOpen.set(false);
   }
+
+  logout(): void {
+    this.auth.logout();
+    this.router.navigate(['/login']);
+  }
 }
+

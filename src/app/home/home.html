@@ -16,8 +16,8 @@
         ease.
       </p>
       <div class="cta-row">
-        <a class="primary-cta" routerLink="/expenses/new">Add an expense</a>
-        <a class="ghost-cta" routerLink="/budgets">Plan my budget</a>
+        <a class="primary-cta" routerLink="/transactions">Add an expense</a>
+        <a class="ghost-cta" routerLink="/categories">Manage categories</a>
       </div>
     </article>
 
@@ -35,9 +35,9 @@
     <article class="action-card" *ngFor="let action of quickActions()">
       <h3>{{ action.title }}</h3>
       <p>{{ action.description }}</p>
-      <button type="button" class="action-link">
+      <a [routerLink]="action.link" class="action-link">
         {{ action.cta }}
-      </button>
+      </a>
     </article>
   </section>
 
