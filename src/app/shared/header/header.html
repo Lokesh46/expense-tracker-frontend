@@ -15,15 +15,17 @@
     </button>
 
     <nav class="nav-links" [class.open]="isMenuOpen()">
-      <a
-        *ngFor="let link of navLinks()"
-        routerLinkActive="active"
-        [routerLinkActiveOptions]="{ exact: link.path === '/home' }"
-        [routerLink]="link.path"
-        (click)="closeMenu()"
-      >
-        {{ link.label }}
-      </a>
+      <ng-container *ngIf="isAuthenticated()">
+        <a
+          *ngFor="let link of navLinks()"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: link.path === '/home' }"
+          [routerLink]="link.path"
+          (click)="closeMenu()"
+        >
+          {{ link.label }}
+        </a>
+      </ng-container>
 
       <div class="auth-actions">
         <ng-container *ngIf="!isAuthenticated(); else loggedIn">
@@ -31,7 +33,7 @@
           <a routerLink="/register" (click)="closeMenu()">Register</a>
         </ng-container>
         <ng-template #loggedIn>
-          <button class="logout-btn" type="button" (click)="logout()">Logout</button>
+          <a routerLink="/login" (click)="logout()">logout</a>
         </ng-template>
       </div>
     </nav>

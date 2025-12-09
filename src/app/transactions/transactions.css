@@ -326,48 +326,92 @@ textarea.form-input {
 
 /* Filters Section */
 .filters-section {
-  padding: 1rem 2rem;
-  border-radius: 1.0rem;
-  background: rgba(255, 255, 255, 0.9);
+  padding: 1.5rem;
+  border-radius: 12px;
+  background: white;
   border: 1px solid rgba(226, 232, 240, 0.7);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .filters-form {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 1rem;
 }
 
 .filters-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 0.75rem;
-  align-items: end;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.25rem;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
 }
 
 .filter-group label {
   font-size: 0.85rem;
-  color: #0f172a;
+  color: #374151;
   font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.filter-group .form-input {
+  padding: 0.65rem 0.85rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+.filter-group .form-input:focus {
+  outline: none;
+  border-color: #8b5cf6;
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+}
+
+.filter-group.search-group .form-input {
+  min-width: 200px;
 }
 
 .filter-actions {
   display: flex;
-  gap: 0.75rem;
+  gap: 1rem;
   margin-top: 0.5rem;
+  justify-content: flex-start;
+}
+
+.primary-btn, .secondary-btn {
+  padding: 0.65rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.primary-btn {
+  background: #8b5cf6;
+  color: white;
+}
+
+.primary-btn:hover:not(:disabled) {
+  background: #7c3aed;
+  transform: translateY(-1px);
 }
 
 .secondary-btn {
-  padding: 0.6rem 1rem;
-  border-radius: 999px;
-  border: 1px solid rgba(148, 163, 184, 0.25);
-  background: rgba(255,255,255,0.85);
-  color: #475569;
-  font-weight: 600;
-  cursor: pointer;
+  background: #f3f4f6;
+  color: #4b5563;
+  border: 1px solid #e5e7eb;
 }
 
 .secondary-btn:hover:not(:disabled) {
+  background: #e5e7eb;
   transform: translateY(-1px);
 }
 

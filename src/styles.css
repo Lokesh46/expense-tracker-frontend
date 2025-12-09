@@ -55,3 +55,28 @@ button {
 .page-card.full-width {
   width: 100%;
 }
+
+/* Shared brand icon used in header/footer */
+.brand-icon {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.6rem;
+  display: inline-block;
+}
+
+/* Unified logout button styling */
+.logout-button {
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid rgba(220, 38, 38, 0.22);
+  background: #ffffff;
+  color: #7f1d1d;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.12s ease;
+}
+
+.logout-button:hover {
+  background: rgba(220, 38, 38, 0.04);
+  transform: translateY(-2px);
+}

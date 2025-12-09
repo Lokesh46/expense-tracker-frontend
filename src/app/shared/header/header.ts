@@ -21,6 +21,7 @@ export class Header {
 
   protected readonly navLinks = signal<NavLink[]>([
     { label: 'Home', path: '/home' },
+    { label: 'Dashboard', path: '/dashboard' },
     { label: 'Categories', path: '/categories' },
     { label: 'Transactions', path: '/transactions' },
     { label: 'Profile', path: '/profile' },

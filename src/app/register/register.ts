@@ -31,6 +31,7 @@ export class Register {
   readonly registerForm = this.fb.nonNullable.group(
     {
       username: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', [Validators.required]],
     },
@@ -49,11 +50,11 @@ export class Register {
       return;
     }
 
-    const { username, password } = this.registerForm.getRawValue();
+    const { username, password, email } = this.registerForm.getRawValue();
     this.isSubmitting.set(true);
 
     this.authService
-      .register({ username, password })
+      .register({ username, password, email })
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: () => {

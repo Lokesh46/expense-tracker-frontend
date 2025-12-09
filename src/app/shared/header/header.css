@@ -28,6 +28,13 @@
   letter-spacing: 0.02em;
 }
 
+.brand-icon {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.6rem;
+  display: inline-block;
+}
+
 .symbol {
   display: inline-flex;
   align-items: center;
