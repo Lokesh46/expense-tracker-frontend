@@ -18,7 +18,7 @@
         <a routerLink="/register">Register</a>
       </ng-container>
       <ng-template #loggedIn>
-        <a routerLink="/login" (click)="logout()">logout</a>
+        <a href="#" (click)="onLogoutClick($event)">logout</a>
       </ng-template>
     </div>
   </div>

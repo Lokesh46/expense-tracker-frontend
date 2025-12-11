@@ -2,6 +2,8 @@
   color-scheme: light;
   --brand-indigo: #4f46e5;
   --brand-violet: #8b5cf6;
+  --header-height: 72px;
+  --footer-height: 64px;
   --slate-900: #0f172a;
   --slate-700: #334155;
   --slate-500: #64748b;
@@ -31,6 +33,19 @@ body {
     radial-gradient(circle at 100% 0%, rgba(236, 72, 153, 0.2), transparent 45%),
     linear-gradient(165deg, #f9fafb 0%, #eef2ff 100%);
   color: var(--slate-900);
+}
+
+/* Keep the app background static while content scrolls */
+body {
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/* Reserve space for fixed header and footer to avoid content overlap */
+body {
+  padding-top: var(--header-height);
+  padding-bottom: var(--footer-height);
 }
 
 a {

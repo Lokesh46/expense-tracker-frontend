@@ -46,5 +46,13 @@ export class Header {
     this.auth.logout();
     this.router.navigate(['/login']);
   }
+
+  onLogoutClick(event: Event): void {
+    event.preventDefault();
+    const confirmed = confirm('Are you sure you want to log out?');
+    if (confirmed) {
+      this.logout();
+    }
+  }
 }
 

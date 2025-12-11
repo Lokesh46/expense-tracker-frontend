@@ -20,7 +20,6 @@
         <a class="ghost-cta" routerLink="/categories">Manage categories</a>
       </div>
     </article>
-
     <aside class="tips">
       <h3>Quick tips</h3>
       <ul>
@@ -29,6 +28,40 @@
         </li>
       </ul>
     </aside>
+  </section>
+
+  <section class="home-summaries">
+    <div class="summaries-grid">
+      <div class="summary-card">
+        <div class="label">This month</div>
+        <div class="value">₹{{ totalThisMonth().toFixed(2) }}</div>
+        <div class="sub">{{ transactionsThisMonth() }} transactions</div>
+      </div>
+
+      <div class="summary-card">
+        <div class="label">Top category</div>
+        <div class="value">{{ topCategoryThisMonth()?.name || '—' }}</div>
+        <div class="sub">₹{{ topCategoryThisMonth()?.total?.toFixed(2) || '0.00' }}</div>
+      </div>
+
+      <div class="summary-card">
+        <div class="label">Recent</div>
+        <div class="value">{{ recentTransactions().length }}</div>
+        <div class="sub">latest transactions</div>
+      </div>
+    </div>
+
+    <div class="recent-list">
+      <h3>Recent Transactions</h3>
+      <div *ngFor="let t of recentTransactions()" class="recent-row">
+        <div class="r-left">
+          <div class="r-desc">{{ t.description }}</div>
+          <div class="r-date">{{ t.date | date: 'MMM d, y' }}</div>
+        </div>
+        <div class="r-amt">₹{{ t.amount.toFixed(2) }}</div>
+      </div>
+      <div *ngIf="recentTransactions().length === 0" class="no-data">No recent transactions</div>
+    </div>
   </section>
 
   <section class="quick-actions">

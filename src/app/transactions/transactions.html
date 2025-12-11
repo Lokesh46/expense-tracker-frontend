@@ -3,14 +3,10 @@
     <span class="header-badge">Management</span>
     <h2>Transactions</h2>
     <p class="subtitle">Track, create, and manage all your expense transactions in one place.</p>
+    <div class="header-actions">
+      <button type="button" class="add-transaction-btn" (click)="showCreateForm.set(true)" title="Add New Transaction">+ Add New Transaction</button>
+    </div>
   </header>
-
-  <!-- Create/Edit Form Section -->
-  <section class="form-section" *ngIf="!showCreateForm()">
-    <button type="button" class="primary-btn" (click)="showCreateForm.set(true)">
-      + Add New Transaction
-    </button>
-  </section>
 
   <section class="form-section" *ngIf="showCreateForm()">
     <h3>{{ isEditMode ? 'Edit Transaction' : 'Create New Transaction' }}</h3>
@@ -84,9 +80,8 @@
             <option value="Credit Card">Credit Card</option>
             <option value="Debit Card">Debit Card</option>
             <option value="Cash">Cash</option>
-            <option value="Bank Transfer">Bank Transfer</option>
-            <option value="Digital Wallet">Digital Wallet</option>
-            <option value="Check">Check</option>
+            <option value="UPI">UPI</option>
+            <option value="Others">Others</option>
           </select>
           <div class="form-error" *ngIf="transactionForm.get('paymentMethod')?.invalid && transactionForm.get('paymentMethod')?.touched">
             <span *ngIf="transactionForm.get('paymentMethod')?.errors?.['required']">Payment method is required</span>
@@ -185,9 +180,8 @@
             <option value="Credit Card">Credit Card</option>
             <option value="Debit Card">Debit Card</option>
             <option value="Cash">Cash</option>
-            <option value="Bank Transfer">Bank Transfer</option>
-            <option value="Digital Wallet">Digital Wallet</option>
-            <option value="Check">Check</option>
+            <option value="UPI">UPI</option>
+            <option value="Others">Others</option>
           </select>
         </div>
 
@@ -201,12 +195,24 @@
         <button type="submit" class="primary-btn">Apply Filters</button>
         <button type="button" class="secondary-btn" (click)="onFilterClear()">Clear</button>
       </div>
+      <!-- sort control moved to table header -->
     </form>
   </section>
 
   <!-- Transactions Table -->
   <section class="table-section" *ngIf="!isLoading() && transactions().length > 0">
-    <h3>Recent Transactions</h3>
+    <div class="table-header">
+      <h3>Recent Transactions</h3>
+      <div class="table-sort">
+        <label for="sortSelect" class="sort-label">Sort:</label>
+        <select id="sortSelect" #sortSelect class="form-input" [value]="sortBy()" (change)="onSortChange(sortSelect.value)">
+          <option value="newest">Newest</option>
+          <option value="oldest">Oldest</option>
+          <option value="amount_desc">Amount: High → Low</option>
+          <option value="amount_asc">Amount: Low → High</option>
+        </select>
+      </div>
+    </div>
     <div class="table-wrapper">
       <table class="transactions-table">
         <thead>

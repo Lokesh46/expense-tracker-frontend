@@ -21,10 +21,26 @@
   <!-- Controls - PRIMARY FILTER -->
   <div class="controls-section">
     <div class="control-group">
-      <label>View:</label>
-      <div class="button-group">
-        <button class="toggle-btn" [class.active]="viewMode() === 'month'" (click)="onViewModeChange('month')">Monthly</button>
-        <button class="toggle-btn" [class.active]="viewMode() === 'year'" (click)="onViewModeChange('year')">Yearly</button>
+      <label id="viewLabel">View:</label>
+      <div class="button-group" role="radiogroup" aria-labelledby="viewLabel">
+        <button
+          class="toggle-btn"
+          role="radio"
+          [attr.aria-checked]="viewMode() === 'month'"
+          [class.active]="viewMode() === 'month'"
+          (click)="onViewModeChange('month')"
+        >
+          Monthly
+        </button>
+        <button
+          class="toggle-btn"
+          role="radio"
+          [attr.aria-checked]="viewMode() === 'year'"
+          [class.active]="viewMode() === 'year'"
+          (click)="onViewModeChange('year')"
+        >
+          Yearly
+        </button>
       </div>
     </div>
 

@@ -1,3 +1,3 @@
 export const API_CONFIG = {
-  baseUrl: 'http://localhost:8081'
+  baseUrl: 'https://expense-tracker-backend-wvri.onrender.com'
 } as const;

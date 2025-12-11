@@ -33,7 +33,7 @@
           <a routerLink="/register" (click)="closeMenu()">Register</a>
         </ng-container>
         <ng-template #loggedIn>
-          <a routerLink="/login" (click)="logout()">logout</a>
+          <a href="#" (click)="onLogoutClick($event)">logout</a>
         </ng-template>
       </div>
     </nav>

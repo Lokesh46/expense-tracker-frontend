@@ -2,11 +2,10 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NotificationsComponent } from './shared/notifications/notifications';
 import { Header } from './shared/header/header';
-import { Footer } from './shared/footer/footer';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, NotificationsComponent, Header, Footer],
+  imports: [RouterOutlet, NotificationsComponent, Header],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

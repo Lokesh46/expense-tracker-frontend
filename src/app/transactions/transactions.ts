@@ -22,6 +22,8 @@ export class TransactionsComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
 
   transactions = signal<Transaction[]>([]);
+  // sort options: newest (default), oldest, amount_desc, amount_asc
+  sortBy = signal<'newest' | 'oldest' | 'amount_desc' | 'amount_asc'>('newest');
   categories = signal<Category[]>([]);
   isLoading = signal(false);
   isCategoriesLoading = signal(false);
@@ -60,6 +62,10 @@ export class TransactionsComponent implements OnInit {
   ngOnInit(): void {
     this.loadCategories();
     this.loadTransactions();
+    // subscribe to service stream so the list updates live (create/update/delete)
+    this.transactionService.transactions$.subscribe((t) => {
+      if (t) this.transactions.set(t);
+    });
   }
 
   loadCategories(): void {
@@ -122,6 +128,9 @@ export class TransactionsComponent implements OnInit {
         this.transactionForm.patchValue({ currency: 'USD' });
         this.showCreateForm.set(false);
         this.isFormLoading.set(false);
+        // show the newest transactions (newly created should appear first)
+        this.sortBy.set('newest');
+        this.currentPage.set(1);
       },
       error: (err) => {
         console.error('Failed to create transaction', err);
@@ -129,6 +138,13 @@ export class TransactionsComponent implements OnInit {
         this.isFormLoading.set(false);
       },
     });
+  }
+
+  onSortChange(value: string): void {
+    if (value === 'newest' || value === 'oldest' || value === 'amount_desc' || value === 'amount_asc') {
+      this.sortBy.set(value as any);
+      this.currentPage.set(1);
+    }
   }
 
   onEditClick(transaction: Transaction): void {
@@ -209,7 +225,7 @@ export class TransactionsComponent implements OnInit {
     const all = this.transactions();
     const f = this.filterForm.value;
 
-    return all.filter((t) => {
+    const filtered = all.filter((t) => {
       // Category filter
       if (f.categoryId && f.categoryId !== '' && t.categoryId !== f.categoryId) return false;
 
@@ -246,7 +262,28 @@ export class TransactionsComponent implements OnInit {
 
       return true;
     });
+
+    // Apply sorting
+    const sort = this.sortBy();
+    filtered.sort((a, b) => {
+      if (sort === 'newest') {
+        return +new Date(b.date) - +new Date(a.date);
+      }
+      if (sort === 'oldest') {
+        return +new Date(a.date) - +new Date(b.date);
+      }
+      if (sort === 'amount_desc') {
+        return (b.amount || 0) - (a.amount || 0);
+      }
+      if (sort === 'amount_asc') {
+        return (a.amount || 0) - (b.amount || 0);
+      }
+      return 0;
+    });
+
+    return filtered;
   }
+
 
   get paginatedTransactions(): Transaction[] {
     const items = this.filteredTransactions;

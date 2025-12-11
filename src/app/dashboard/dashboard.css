@@ -2,7 +2,7 @@
   max-width: 1600px;
   margin: 0 auto;
   padding: 1rem;
-  background: linear-gradient(135deg, #f5f3ff 0%, #fafafa 100%);
+  background: transparent;
   min-height: 100vh;
   overflow-y: auto;
 }
@@ -135,6 +135,11 @@
 .toggle-btn:hover {
   background: rgba(139, 92, 246, 0.1);
   color: #8b5cf6;
+}
+
+.toggle-btn:focus {
+  outline: 3px solid rgba(139, 92, 246, 0.18);
+  outline-offset: 2px;
 }
 
 /* Charts Grid - Optimized for single page */
@@ -400,7 +405,7 @@
 
 .transaction-date {
   font-size: 0.8rem;
-  color: #9ca3af;
+  color: #6b7280;
 }
 
 .transaction-amount {
